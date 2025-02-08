@@ -4,7 +4,8 @@
   "description": "A viewer for Diff/AST",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . DiffViewer --icon=icon.icns --overwrite"
   },
   "repository": "https://github.com/codinuum/diffviewer",
   "keywords": [
@@ -16,7 +17,7 @@
   "license": "Apache 2.0",
   "devDependencies": {
     "electron": ">=11.5.0",
-    "electron-packager": ">=15.1.0"
+    "@electron/packager": ">=15.1.0"
   },
   "dependencies": {
     "codemirror": "^5.65.12",

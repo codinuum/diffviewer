@@ -91,18 +91,18 @@ if __name__ == '__main__':
             if PLATFORM == 'darwin':
                 cmdp = os.path.join(viewer_app_path,
                                     '/Contents/MacOS/DiffViewer')
+                cmd = f'{cmdp} --args{opt}'
 
             elif PLATFORM == 'linux':
                 cmdp = viewer_app_path
-
-            cmd = f'{cmdp} --args{opt}'
+                cmd = f'{cmdp} --no-sandbox --args{opt}'
         else:
             app = viewer_app_path
 
             if PLATFORM == 'darwin':
                 cmd = f'open -n {app} --args{opt}'
             elif PLATFORM == 'linux':
-                cmd = f'{app} --args{opt} &'
+                cmd = f'{app} --no-sandbox --args{opt} &'
 
         try:
             rc = call(cmd, shell=True)

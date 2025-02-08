@@ -7,7 +7,7 @@
 ## Build
 
     $ npm install
-    $ ./mkpkg.sh
+    $ npm run build
 
 ## Usage (macOS)
 
