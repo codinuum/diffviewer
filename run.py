@@ -5,13 +5,13 @@ import sys
 import re
 from subprocess import call
 
-VIEWER_APP_DIR_PAT = re.compile(r'DiffViewer-darwin-([0-9a-z]+)')
-VIEWER_CMD_PATH = '/Contents/MacOS/DiffViewer'
+VIEWER_APP_DIR_PAT = re.compile(r'DiffViewer-(.+)-([0-9a-z]+)')
+
 
 if __name__ == '__main__':
     from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
-    parser = ArgumentParser(description='run DiffViewer',
+    parser = ArgumentParser(description='DiffViewer driver',
                             formatter_class=ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('file0', type=str, metavar='ORIGINAL',
@@ -70,19 +70,39 @@ if __name__ == '__main__':
     here = os.path.dirname(sys.argv[0])
     viewer_app_path = None
 
+    platform = sys.platform
+
     for fn in os.listdir(here):
         if VIEWER_APP_DIR_PAT.match(fn):
-            viewer_app_path = os.path.join(here, fn, 'DiffViewer.app')
+            if platform == 'darwin':
+                viewer_app_path = os.path.join(here, fn, 'DiffViewer.app')
+
+            elif platform == 'linux':
+                viewer_app_path = os.path.join(here, fn, 'DiffViewer')
+
+            else:
+                print(f'not supported: {sys.platform}')
+                sys.exit(1)
 
     if viewer_app_path is None:
         print('App not found')
     else:
         if args.foreground:
-            cmdp = os.path.join(viewer_app_path, VIEWER_CMD_PATH)
+            if platform == 'darwin':
+                cmdp = os.path.join(viewer_app_path,
+                                    '/Contents/MacOS/DiffViewer')
+
+            elif platform == 'linux':
+                cmdp = viewer_app_path
+
             cmd = f'{cmdp} --args{opt}'
         else:
             app = viewer_app_path
-            cmd = f'open -n {app} --args{opt}'
+
+            if platform == 'darwin':
+                cmd = f'open -n {app} --args{opt}'
+            elif platform == 'linux':
+                cmd = f'{app} --args{opt} &'
 
         try:
             rc = call(cmd, shell=True)
