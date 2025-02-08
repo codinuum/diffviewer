@@ -2,6 +2,7 @@
 
 ## Requirements
 
+* macOS or Linux
 * [Node.js](https://nodejs.org/en/download/)
 
 ## Build
@@ -9,7 +10,7 @@
     $ npm install
     $ npm run build
 
-## Usage (macOS)
+## Usage
 
 The following assumes that Diff/AST is installed.
 
