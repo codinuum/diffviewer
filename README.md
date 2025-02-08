@@ -1,17 +1,19 @@
-# DiffViewer for Diff/AST
+# DiffViewer: A simple viewer for Diff/AST
 
 ## Requirements
 
 * [Node.js](https://nodejs.org/en/download/)
 
-## Build (macOS:Intel)
+## Build
 
     $ npm install
-    $ ./mkpkg.sh --arch=x64
+    $ ./mkpkg.sh
 
 ## Usage (macOS)
 
-    $ ../src/ast/analyzing/bin/diffast [--cache PATH] PATH0 PATH1
+The following assumes that Diff/AST is installed.
+
+    $ diffast [--cache PATH] PATH0 PATH1
     $ ./run.py [--cache PATH] PATH0 PATH1
 
 ## License
