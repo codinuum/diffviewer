@@ -90,7 +90,7 @@ if __name__ == '__main__':
         if args.foreground:
             if PLATFORM == 'darwin':
                 cmdp = os.path.join(viewer_app_path,
-                                    '/Contents/MacOS/DiffViewer')
+                                    'Contents/MacOS/DiffViewer')
                 cmd = f'{cmdp} --args{opt}'
 
             elif PLATFORM == 'linux':
